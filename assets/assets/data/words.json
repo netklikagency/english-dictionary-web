@@ -1,0 +1,23 @@
+[
+  {
+    "word": "hello",
+    "definition": "An expression of greeting",
+    "phonetic": "/həˈloʊ/",
+    "example": "Hello, how are you?",
+    "pos": "noun"
+  },
+  {
+    "word": "world",
+    "definition": "People in general; especially a distinctive group of people with some shared interest",
+    "phonetic": "/wɜːrld/",
+    "example": "The whole world is watching.",
+    "pos": "noun"
+  },
+  {
+    "word": "dictionary",
+    "definition": "A reference book containing an alphabetical list of words with information about them",
+    "phonetic": "/ˈdɪkʃəneri/",
+    "example": "I looked it up in the dictionary.",
+    "pos": "noun"
+  }
+]

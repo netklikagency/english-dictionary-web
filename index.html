@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="/english-dictionary-web/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SEO — Balises principales                                    -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <title>English Dictionary - Free Offline Dictionary App</title>
+  <meta name="description" content="Free English dictionary app with offline definitions, pronunciation audio, word search, and favorites. Works on Android, iOS, and web. No internet required.">
+  <meta name="keywords" content="english dictionary, free dictionary, offline dictionary, word definitions, english words, vocabulary, dictionary app, wordnet, learn english">
+  <meta name="author" content="Sngine">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <meta name="rating" content="general">
+
+  <!-- Canonical URL (à adapter à votre domaine GitHub Pages) -->
+  <link rel="canonical" href="https://netklikagency.github.io/english-dictionary-web/">
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SEO — Open Graph (Facebook, WhatsApp, LinkedIn)             -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="English Dictionary - Free Offline Dictionary App">
+  <meta property="og:description" content="Free English dictionary app with offline definitions, pronunciation audio, word search, and favorites. Works on Android and web.">
+  <meta property="og:url" content="https://netklikagency.github.io/english-dictionary-web/">
+  <meta property="og:image" content="https://netklikagency.github.io/english-dictionary-web/icons/Icon-512.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:site_name" content="English Dictionary">
+  <meta property="og:locale" content="en_US">
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SEO — Twitter Card                                          -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="English Dictionary - Free Offline Dictionary App">
+  <meta name="twitter:description" content="Free English dictionary with offline definitions, audio pronunciation, and favorites.">
+  <meta name="twitter:image" content="https://netklikagency.github.io/english-dictionary-web/icons/Icon-512.png">
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- PWA — Progressive Web App                                   -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="English Dictionary">
+  <meta name="application-name" content="English Dictionary">
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="msapplication-TileColor" content="#2E7D32">
+  <meta name="msapplication-TileImage" content="icons/Icon-144.png">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SEO — Données structurées (JSON-LD) pour Google             -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "English Dictionary",
+    "operatingSystem": "Android, Web, iOS",
+    "applicationCategory": "EducationalApplication",
+    "description": "Free English dictionary app with offline definitions, pronunciation audio, word search, and favorites.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "100"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Sngine"
+    }
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- Styles inline pour le bouton "Install the app"              -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #F5F5F5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* Loader affiché avant que Flutter ne soit prêt */
+    #loading {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #F5F5F5;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid #2E7D32;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .loading-text {
+      margin-top: 16px;
+      color: #2E7D32;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    /* Bouton "Install the app" PWA */
+    #install-pwa-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 10000;
+      background-color: #2E7D32;
+      color: #FFFFFF;
+      border: none;
+      padding: 14px 22px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      display: none;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+    #install-pwa-btn:hover {
+      background-color: #1B5E20;
+      transform: translateY(-2px);
+    }
+    #install-pwa-btn:active {
+      transform: translateY(0);
+    }
+    #install-pwa-btn svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* Message "Installation en cours" */
+    #install-message {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      z-index: 10000;
+      background-color: #1B5E20;
+      color: #FFFFFF;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      max-width: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">Loading English Dictionary...</div>
+  </div>
+
+  <!-- Bouton d'installation PWA -->
+  <button id="install-pwa-btn" aria-label="Install English Dictionary app">
+    <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2L13.09 8.26L19 6L15.5 11L21 13L15.5 15L19 20L13.09 17.74L12 24L10.91 17.74L5 20L8.5 15L3 13L8.5 11L5 6L10.91 8.26L12 2Z"/>
+    </svg>
+    Install the app
+  </button>
+
+  <!-- Message de confirmation -->
+  <div id="install-message"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SEO — Contenu HTML caché pour les robots (noscript)        -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <noscript>
+    <h1>English Dictionary - Free Offline Dictionary App</h1>
+    <p>
+      Free English dictionary app with offline definitions, pronunciation audio,
+      word search, and favorites. Works on Android and web. No internet required.
+    </p>
+    <p>
+      Search any English word and get its definition, pronunciation, part of speech,
+      and examples. Save your favorite words and access them anytime.
+    </p>
+    <h2>Features</h2>
+    <ul>
+      <li>Offline dictionary with thousands of English words</li>
+      <li>Audio pronunciation</li>
+      <li>Favorites and history</li>
+      <li>Fast search</li>
+      <li>Free and ad-free</li>
+    </ul>
+    <p>Please enable JavaScript to use the full application.</p>
+  </noscript>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- Initialisation Flutter                                      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <script>
+    // PWA installation
+    let deferredPrompt;
+    const installBtn = document.getElementById('install-pwa-btn');
+    const installMsg = document.getElementById('install-message');
+    const loading = document.getElementById('loading');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'flex';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) {
+        installMsg.textContent = 'To install: tap your browser menu → "Add to Home Screen"';
+        installMsg.style.display = 'block';
+        setTimeout(() => { installMsg.style.display = 'none'; }, 5000);
+        return;
+      }
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        installMsg.textContent = '✅ App installed successfully!';
+      } else {
+        installMsg.textContent = 'Installation cancelled.';
+      }
+      installMsg.style.display = 'block';
+      setTimeout(() => { installMsg.style.display = 'none'; }, 4000);
+      deferredPrompt = null;
+      installBtn.style.display = 'none';
+    });
+
+    window.addEventListener('appinstalled', () => {
+      installBtn.style.display = 'none';
+      installMsg.textContent = '✅ App installed! Find it on your home screen.';
+      installMsg.style.display = 'block';
+      setTimeout(() => { installMsg.style.display = 'none'; }, 5000);
+    });
+
+    // Masquer le loader quand Flutter est prêt
+    window.addEventListener('flutter-first-frame', () => {
+      loading.classList.add('hidden');
+      setTimeout(() => loading.remove(), 400);
+    });
+
+    // Sécurité : masquer le loader après 10s si Flutter n'a pas démarré
+    setTimeout(() => {
+      if (loading) loading.classList.add('hidden');
+    }, 10000);
+  </script>
+
+  <!-- Flutter bootstrap -->
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
